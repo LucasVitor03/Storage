@@ -13,13 +13,6 @@ namespace Storage_Project.Controllers
         public static List<Produto> lsProdutos = new List<Produto>();
         public IActionResult Index()
         {
-            Produto p1 = new Produto();
-            p1.Codigo = 99;
-            p1.Descricao = "Mesa Digital";
-            p1.Valor = 950;
-
-            lsProdutos.Add(p1);
-
             return View(lsProdutos);
         }
 
