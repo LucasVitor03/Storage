@@ -51,16 +51,18 @@ namespace Storage_Project.Controllers
         // GET: UsuariosController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View( db.USUARIOS.Where(a=> a.Id == id).FirstOrDefault() );
         }
 
         // POST: UsuariosController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Usuarios collection)
         {
             try
             {
+                db.USUARIOS.Update(collection);
+                db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -72,22 +74,10 @@ namespace Storage_Project.Controllers
         // GET: UsuariosController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            db.USUARIOS.Remove(db.USUARIOS.Where(a => a.Id == id).FirstOrDefault());
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
-        // POST: UsuariosController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
